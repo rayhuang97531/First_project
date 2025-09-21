@@ -37,7 +37,7 @@ class TestPlaywright01:
     #Lesson11HW
     def test02_pchome_search(self):
         self.page.goto("https://24h.pchome.com.tw/")
-        close_button = self.page.locator('[data-gtm-name="close"]') #給變數
+        close_button = self.page.get_by_label("close button")  #給變數
         if close_button.is_visible():   #利用變數檢查元素是否存在且可見
             close_button.click()        #確定有再點擊關閉
         search_input = self.page.locator('input[type="search"]')
@@ -54,11 +54,29 @@ class TestPlaywright01:
         email_value = self.page.input_value('input[id="loginAcc"]')
         assert email_value == "testuser001@gmail.com"
 
-
+    #Lesson12HW
+    def test04_pchome_coupons(self):
+        self.page.goto("https://24h.pchome.com.tw/")
+        close_button = self.page.get_by_label("close button") 
+        if close_button.is_visible():
+            close_button.click()
+        self.page.get_by_role("link",name = "看全部").click()
+        assert "折價券" in self.page.title().strip() #驗證是否進入顯示標題
+    
+    def test05_pchome_coupon(self):
+        self.page.goto("https://24h.pchome.com.tw/")
+        close_button = self.page.get_by_label("close button") 
+        if close_button.is_visible():
+            close_button.click()
+        self.page.get_by_text("查看商品").nth(2).click() #查看首頁你的折價券第三個查看商品
+        assert "現折" in self.page.title().strip() #驗證是否進入顯示標題
+        
    
 if __name__ == '__main__':
     #pytest.main(["-s", Script + "::TestPlaywright01::test01_pchome_webopen"])
-    pytest.main(["-s", Script + "::TestPlaywright01::test02_pchome_search"])
+    #pytest.main(["-s", Script + "::TestPlaywright01::test02_pchome_search"])
     #pytest.main(["-s", Script + "::TestPlaywright01::test03_pchome_interaction"])
+    #pytest.main(["-s", Script + "::TestPlaywright01::test04_pchome_coupons"])
+    pytest.main(["-s", Script + "::TestPlaywright01::test05_pchome_coupon"])
 
     
