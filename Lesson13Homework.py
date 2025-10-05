@@ -21,10 +21,10 @@ class TestPlaywright01:
         print("\n--- start test ---")
         self.context = self.browser.new_context(record_video_dir="video/") #新增:啟動新context、錄像
         self.page = self.context.new_page()
-        #self.page.context.tracing.start(screenshots=True, snapshots=True)   #新增軌跡
+        self.page.context.tracing.start(screenshots=True, snapshots=True)   #新增軌跡
         
     def teardown_method(self):
-        #self.context.tracing.stop(path="trace/trace.zip")   #關閉軌跡生成檔案
+        self.context.tracing.stop(path="trace/trace.zip")   #關閉軌跡生成檔案
         self.page.close()
         self.context.close()
         print("--- end test ---")
