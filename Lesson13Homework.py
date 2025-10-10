@@ -81,10 +81,13 @@ class TestPlaywright01:
         close_button = self.page.get_by_label("close button") 
         if close_button.is_visible():
             close_button.click()
-        search_input = self.page.locator('input[type="search"]')
-        search_input.fill("衛生紙")
-        search_input.press("Enter")
-        self.page.get_by_title("Kleenex 舒潔 蓬柔舒膚抽取衛生紙(100抽x16包)").click()
+        #search_input = self.page.locator('input[type="search"]')
+        #search_input.fill("衛生紙")
+        #search_input.press("Enter")
+        self.page.get_by_text("日用").nth(0).click()
+        self.page.get_by_text("衛生紙").nth(0).click()
+        self.page.get_by_title("平版衛生紙").click()
+        self.page.get_by_title("平版衛生紙").nth(3).click()
         self.page.get_by_text("加入購物車").click()
         expect(self.page.locator("text=商品已加入購物車！")).to_be_visible()
 
