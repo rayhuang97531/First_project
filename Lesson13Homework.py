@@ -76,7 +76,7 @@ class TestPlaywright01:
         assert "現折" in self.page.title().strip() #驗證是否進入顯示標題
 
     #Lesson13HW
-    def test06_pchome_addtocar(self):
+    def test06_pchome_addtocart(self):
         self.page.goto("https://24h.pchome.com.tw/")
         close_button = self.page.get_by_label("close button") 
         if close_button.is_visible():
@@ -99,7 +99,7 @@ if __name__ == '__main__':
     #pytest.main(["-s", Script + "::TestPlaywright01::test03_pchome_interaction"])
     #pytest.main(["-s", Script + "::TestPlaywright01::test04_pchome_coupons"])
     #pytest.main(["-s", Script + "::TestPlaywright01::test05_pchome_coupon"])
-    pytest.main(["-s", Script + "::TestPlaywright01::test06_pchome_addtocar"])
+    pytest.main(["-s", Script + "::TestPlaywright01::test06_pchome_addtocart"])
 
 
     
