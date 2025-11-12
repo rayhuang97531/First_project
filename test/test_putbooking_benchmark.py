@@ -1,6 +1,9 @@
+#測試Booking API - benchmark效能測試 - 整筆訂單資料更新
+#運用設定檔config及fixture
+
 import requests
 import pytest
-from config import BASE_URL
+from src.config import BASE_URL
 
 class TestAPIBenchmarks:
     def test_benchmark_get_booking(self, benchmark, create_booking):

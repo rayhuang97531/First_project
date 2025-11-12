@@ -1,6 +1,9 @@
+#測試Booking API - 訂單部分資料更新
+#運用設定檔config及fixture
+
 import requests
 import pytest
-from config import BASE_URL
+from src.config import BASE_URL
 
 class Test_patch_booking:
     def test_patch_booking(self,create_token,create_booking):

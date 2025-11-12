@@ -1,12 +1,12 @@
 import pytest
 import requests
-from config import BASE_URL
+from src.config import BASE_URL
 
-@pytest.fixture(scope="session")        #?
+@pytest.fixture(scope="session")
 def api_base_url():
     return BASE_URL
 
-@pytest.fixture(scope="session")        #?
+@pytest.fixture(scope="session")
 def verify_api_health():
     """Verify API is accessible before running tests."""
     try:

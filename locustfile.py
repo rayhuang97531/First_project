@@ -1,3 +1,5 @@
+#測試Booking API - Locust壓力測試 - 整筆訂單資料更新
+
 import requests
 from locust import HttpUser, task, between
 
