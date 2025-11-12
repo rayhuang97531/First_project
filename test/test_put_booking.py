@@ -1,3 +1,6 @@
+#測試Booking API - 整筆訂單資料更新
+#基礎腳本編寫
+
 import requests
 
 BASE_URL = "https://restful-booker.herokuapp.com"

@@ -1,3 +1,6 @@
+#測試Booking API - Delete刪除整筆訂單
+#基礎腳本編寫
+
 import requests
 
 BASE_URL = "https://restful-booker.herokuapp.com"

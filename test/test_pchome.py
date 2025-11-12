@@ -1,5 +1,7 @@
 #自動測試的網站：PChome
-#新增：搜尋功能測試、表單互動測試
+#網頁進入、搜尋、郵件記住、折價券、購物車加入功能測試
+#有使用videos錄像及trace軌跡做紀錄，可方便回放測試過程
+
 import pytest, os, time
 from playwright.sync_api import sync_playwright, Page, Browser, expect
 Script = os.path.basename(__file__)
@@ -30,7 +32,7 @@ class TestPlaywright01:
         print("--- end test ---")
     
     ### Frontend Tests ###
-    #Lesson10HW
+    #網頁進入測試
     def test01_pchome_webopen(self):
         print("Testing PChome webpage opening function")
         
@@ -38,7 +40,7 @@ class TestPlaywright01:
         time.sleep(3)
         assert "PChome 24h購物" in self.page.title()
     
-    #Lesson11HW
+    #搜尋功能測試
     def test02_pchome_search(self):
         self.page.goto("https://24h.pchome.com.tw/")
         close_button = self.page.get_by_label("close button")  #給變數
@@ -50,7 +52,7 @@ class TestPlaywright01:
         assert "iPhone17" in self.page.url  # 驗證URL是否包含搜尋參數
         assert "iphone17" in self.page.title().lower()
     
-    #Lesson11HW
+    #登入郵件記住功能測試
     def test03_pchome_interaction(self):
         self.page.goto("https://ecvip.pchome.com.tw/login/v3/login.htm?rurl=https%3A%2F%2F24h.pchome.com.tw%2F&mrg=1&_gl=1*14gntc2*_gcl_aw*R0NMLjE3NTc3NzE3ODAuRUFJYUlRb2JDaE1JdmVuemtmTFZqd01WWmRFV0JSMndwd2k3RUFBWUFTQUFFZ0t6QWZEX0J3RQ..*_gcl_au*MTc5OTA1MjEyLjE3NTc3NzE3Nzg.*_ga*MTg5NDMzMzYzNS4xNzU3NzcxNzgw*_ga_9CE1X6J1FG*czE3NTc3NzU4ODckbzIkZzEkdDE3NTc3NzU5NDUkajIkbDAkaDU3MTEyNjI3MA..*_fplc*NkthU0pCU0dFbEpXdWZlUXZ5ZXRObHFTTlRjck9GQkRFU0ZQbkRSZkhnUUoyV0xlZ2JYczIyQ1lpSkFoTG9RZyUyQjElMkI1RTRFV1ZHTE5pUmVwMiUyQmVtOW5FbFc5QkhvYUVnNm16c28yWEIwZ0xNOUcwMWNqJTJGWU90QmJkd1FGSFElM0QlM0Q.")
         self.page.fill('input[id="loginAcc"]',"testuser001@gmail.com")
@@ -58,7 +60,7 @@ class TestPlaywright01:
         email_value = self.page.input_value('input[id="loginAcc"]')
         assert email_value == "testuser001@gmail.com"
 
-    #Lesson12HW
+    #折價券功能測試
     def test04_pchome_coupons(self):
         self.page.goto("https://24h.pchome.com.tw/")
         close_button = self.page.get_by_label("close button") 
@@ -72,18 +74,15 @@ class TestPlaywright01:
         close_button = self.page.get_by_label("close button") 
         if close_button.is_visible():
             close_button.click()
-        self.page.get_by_text("查看商品").nth(2).click() #查看首頁你的折價券第三個查看商品
+        self.page.get_by_text("查看商品").nth(0).click() #查看首頁你的折價券第1個查看商品
         assert "現折" in self.page.title().strip() #驗證是否進入顯示標題
 
-    #Lesson13HW
+    #加入購物車功能測試
     def test06_pchome_addtocart(self):
         self.page.goto("https://24h.pchome.com.tw/")
         close_button = self.page.get_by_label("close button") 
         if close_button.is_visible():
             close_button.click()
-        #search_input = self.page.locator('input[type="search"]')
-        #search_input.fill("衛生紙")
-        #search_input.press("Enter")
         self.page.get_by_text("日用").nth(0).click()
         self.page.get_by_text("衛生紙").nth(0).click()
         self.page.get_by_title("平版衛生紙").click()
@@ -94,11 +93,11 @@ class TestPlaywright01:
         
    
 if __name__ == '__main__':
-    #pytest.main(["-s", Script + "::TestPlaywright01::test01_pchome_webopen"])
-    #pytest.main(["-s", Script + "::TestPlaywright01::test02_pchome_search"])
-    #pytest.main(["-s", Script + "::TestPlaywright01::test03_pchome_interaction"])
-    #pytest.main(["-s", Script + "::TestPlaywright01::test04_pchome_coupons"])
-    #pytest.main(["-s", Script + "::TestPlaywright01::test05_pchome_coupon"])
+    pytest.main(["-s", Script + "::TestPlaywright01::test01_pchome_webopen"])
+    pytest.main(["-s", Script + "::TestPlaywright01::test02_pchome_search"])
+    pytest.main(["-s", Script + "::TestPlaywright01::test03_pchome_interaction"])
+    pytest.main(["-s", Script + "::TestPlaywright01::test04_pchome_coupons"])
+    pytest.main(["-s", Script + "::TestPlaywright01::test05_pchome_coupon"])
     pytest.main(["-s", Script + "::TestPlaywright01::test06_pchome_addtocart"])
 
 
